@@ -1,1 +1,9 @@
-<h1>Product index</h1>
+<h1>Listing Products</h1>
+<%= link_to 'View Basket', controller: 'baskets' %>
+<%= link_to 'New product', new_product_path %>
+
+<table>
+	<td><%= link_to 'View', product_path(product)</td>
+	<td><%= link_to 'Add to basket', method: :add</td>
+
+</table>

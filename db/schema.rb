@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_120824) do
+ActiveRecord::Schema.define(version: 2020_11_10_131133) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "name"
@@ -20,12 +20,20 @@ ActiveRecord::Schema.define(version: 2020_11_10_120824) do
     t.index ["basket_id"], name: "index_accounts_on_basket_id"
   end
 
+  create_table "basket_products", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "product_id", null: false
+    t.integer "basket_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["basket_id"], name: "index_basket_products_on_basket_id"
+    t.index ["product_id"], name: "index_basket_products_on_product_id"
+  end
+
   create_table "baskets", force: :cascade do |t|
-    t.integer "account_id", null: false
     t.integer "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_id"], name: "index_baskets_on_account_id"
     t.index ["product_id"], name: "index_baskets_on_product_id"
   end
 
@@ -38,6 +46,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_120824) do
   end
 
   add_foreign_key "accounts", "baskets"
-  add_foreign_key "baskets", "accounts"
+  add_foreign_key "basket_products", "baskets"
+  add_foreign_key "basket_products", "products"
   add_foreign_key "baskets", "products"
 end

@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
 	
+	
 	def index
 	
 	end
@@ -9,7 +10,7 @@ class ProductsController < ApplicationController
 	end
 	
 	def new
-	
+		@product = Product.new
 	end
 
 	def edit

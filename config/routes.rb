@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 	get 'welcome/index'
   
 	resources :products
-	resources :accounts do
-		resources :baskets
+	resources :baskets do
+		resources :basketProducts
 	end
   
 	root 'welcome#index'
