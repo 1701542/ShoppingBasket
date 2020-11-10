@@ -9,4 +9,8 @@
 	<%= @product.description %>
 </p>
 
+<p>
+	<%= link_to 'Add to basket', add_item(@product.id) %>
+</p>
+
 <%= link_to 'Back', products_path %>

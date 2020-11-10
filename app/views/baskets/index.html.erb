@@ -3,13 +3,19 @@
 <%= link_to 'Back to products', controller: 'products' %>
 
 <h2>Items</h2>
-<% @baskets.each do|basket| %>
-	<% @basket.basket_products.each do |basket_product| %>
-		<p>
-			<strong>Quantity:</strong>
-			@product = Product.where(id: basket_product.productid)
-			<%= basket_product.quantity %>
-		</p>
+<% if Basket.first.nil? == true %>
+	<p><h3>There are no items<h3></p>
+	<% create %>
+<% else %>
+	<% @baskets.each do|basket| %>
+		<% @basket.basket_products.each do |basket_product| %>
+			<p>
+				<strong>Quantity:</strong>
+				@product = Product.where(id: basket_product.productid)
+				<%= basket_product.quantity %>
+			</p>
+		<% end %>
+
 	<% end %>
 <% end %>
 
