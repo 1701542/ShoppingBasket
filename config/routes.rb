@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
 	resources :products
 	resources :baskets do
-		resources :basketProducts
+		resources :basket_products
 	end
   
 	root 'welcome#index'

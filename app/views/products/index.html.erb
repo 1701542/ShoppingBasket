@@ -1,9 +1,13 @@
-<h1>Listing Products</h1>
-<%= link_to 'View Basket', controller: 'baskets' %>
+<h1><%= link_to 'Shamazon', controller: 'welcome' %></h1>
+<%= link_to 'View Basket', controller: 'baskets' %> | 
 <%= link_to 'New product', new_product_path %>
 
 <table>
-	<td><%= link_to 'View', product_path(product)</td>
-	<td><%= link_to 'Add to basket', method: :add</td>
-
+	<% @products.each do |product| %>
+		<tr>
+			<td><%= product.id %></td>
+			<td><%= link_to product.name, product_path(product) %></td>
+			<td><%= link_to 'Add to basket', product_path(product), method: :add_item(product.id) %></td>
+		</tr>
+	<% end %>
 </table>

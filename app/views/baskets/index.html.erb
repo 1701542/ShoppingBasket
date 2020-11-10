@@ -1,1 +1,17 @@
+<h1><%= link_to 'Shamazon', controller: 'welcome' %></h1>
 <h1>Basket</h1>
+<%= link_to 'Back to products', controller: 'products' %>
+
+<h2>Items</h2>
+<% @baskets.each do|basket| %>
+	<% @basket.basket_products.each do |basket_product| %>
+		<p>
+			<strong>Quantity:</strong>
+			@product = Product.where(id: basket_product.productid)
+			<%= basket_product.quantity %>
+		</p>
+	<% end %>
+<% end %>
+
+<%= link_to 'Empty Basket', method: :empty, data: { confirm: 'Are you sure?' } %> | 
+<%= link_to 'Back to products', controller: 'products' %>

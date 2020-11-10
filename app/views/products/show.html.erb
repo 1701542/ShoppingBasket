@@ -1,1 +1,12 @@
-<h1>Show product</h1>
+<h1><%= link_to 'Shamazon', controller: 'welcome' %></h1>
+
+<p>
+	<h2><%= @product.name %></h2>
+</p>
+
+<p>
+	<strong>Description:</strong>
+	<%= @product.description %>
+</p>
+
+<%= link_to 'Back', products_path %>
