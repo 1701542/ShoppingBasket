@@ -1,0 +1,18 @@
+<h1><%= link_to 'Shamazon', controller: 'welcome' %></h1>
+
+<% if BasketProduct.first.nil? == true %>
+	<p><h3>There are no items<h3></p>
+<% else %>
+	<table>
+		<% @basket_products.each do |basket_product| %>
+			<tr>
+				<td><%= basket_product.quantity %></td>
+				<td><%= basket_product.product.name %></td>
+			</tr>
+		<% end %>
+	</table>
+<% end %>
+
+<p>
+	<%= link_to 'View products', controller: 'products' %>
+</p>

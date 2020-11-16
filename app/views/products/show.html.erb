@@ -10,7 +10,7 @@
 </p>
 
 <p>
-	<%= link_to 'Add to basket', add_item(@product.id) %>
+	<%= button_to 'Add to basket', basket_products_path(:product_id => @product.id) %>
 </p>
 
 <%= link_to 'Back', products_path %>

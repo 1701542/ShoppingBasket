@@ -1,12 +1,50 @@
 class BasketProductsController < ApplicationController
+	def index
+		@basket_products = BasketProduct.all
+	end
 	
-	def add_item(product_id)
-		if Basket.first.nil?
-			Basket.create()
-		basket_product.create(:quantity => 1, :productid => product_id)
+	def show
+		@basket_product = BasketProduct.find(params[:id])
+	end
+	
+	def quantity_add
+		@basket_product = BasketProduct.find(params[:id])
+		@basket_product.quantity += 1
+		@basket_product.save
+		redirect_to index
+	end
+	
+	def quantity_reduce
+		@basket_product = BasketProduct.find(params[:id])
+		if @basket_product.quantity > 1
+			@basket_product.quantity -= 1
+		end
+		@basket_product.save
+		redirect_to index
+	end
+	
+	def new
+		@basket_product = BasketProduct.new
 	end
 	
 	def create
-	
+		product = Product.find(params[:product_id])
+		
+		if BasketProduct.where(:product => product).any?
+			@basket_product = BasketProduct.products.find_by(:product_id => product.id)
+			@basket_product.quantity += 1
+		else
+			@basket_product = BasketProduct.new
+			@basket_product.product = product
+			@basket_product.quantity = 1
+		end
+		
+		@basket_product.save
+		redirect_to index
 	end
+	
+	private
+		def basket_product_params
+			params.require(:product, :quantity)
+		end
 end
