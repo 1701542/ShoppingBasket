@@ -20,7 +20,7 @@ class BasketProductsController < ApplicationController
 			@basket_product.quantity -= 1
 		end
 		@basket_product.save
-		redirect_to index
+		redirect_to basket_products_path
 	end
 	
 	def new
@@ -31,7 +31,7 @@ class BasketProductsController < ApplicationController
 		product = Product.find(params[:product_id])
 		
 		if BasketProduct.where(:product => product).any?
-			@basket_product = BasketProduct.products.find_by(:product_id => product.id)
+			@basket_product = BasketProduct.find_by(product: product.id)
 			@basket_product.quantity += 1
 		else
 			@basket_product = BasketProduct.new
@@ -40,7 +40,7 @@ class BasketProductsController < ApplicationController
 		end
 		
 		@basket_product.save
-		redirect_to index
+		redirect_to BasketProduct
 	end
 	
 	private
