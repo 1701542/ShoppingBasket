@@ -1,12 +1,4 @@
-class BasketProductsController < ApplicationController
-	def index
-		@basket_products = BasketProduct.all
-	end
-	
-	def show
-		@basket_product = BasketProduct.find(params[:id])
-	end
-	
+class BasketProductsController < ApplicationController	
 	def quantity_add
 		@basket_product = BasketProduct.find(params[:id])
 		@basket_product.quantity += 1
@@ -22,6 +14,21 @@ class BasketProductsController < ApplicationController
 		@basket_product.save
 		redirect_to basket_products_path
 	end
+	
+	def destroyall
+		BasketProduct.delete_all
+		
+		redirect_to BasketProduct
+	end
+	
+	def index
+		@basket_products = BasketProduct.all
+	end
+	
+	def show
+		@basket_product = BasketProduct.find(params[:id])
+	end
+
 	
 	def new
 		@basket_product = BasketProduct.new
@@ -41,6 +48,13 @@ class BasketProductsController < ApplicationController
 		
 		@basket_product.save
 		redirect_to BasketProduct
+	end
+	
+	def destroy
+		@basket_product = BasketProduct.find(params[:id])
+		@basket_product.destroy
+		
+		redirect_to basket_products_path
 	end
 	
 	private

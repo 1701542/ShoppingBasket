@@ -1,5 +1,7 @@
 <h1><%= link_to 'Scamazon', controller: 'welcome' %></h1>
 
+<h2>Basket</h2>
+
 <% if BasketProduct.first.nil? == true %>
 	<p><h3>There are no items<h3></p>
 <% else %>
@@ -9,6 +11,7 @@
 				<td><%= basket_product.quantity %></td>
 				<td><%= basket_product.product.name %></td>
 				<td>£<%= basket_product.product.price %></td>
+				<td><%= link_to 'Remove', basket_product_path(basket_product), method: :delete %></td>
 			</tr>
 		<% end %>
 	</table>
@@ -16,4 +19,5 @@
 
 <p>
 	<%= link_to 'View products', controller: 'products' %>
+	<%= link_to 'Empty Basket', basket_product_destroyall_path, method: :destroyall %>
 </p>
