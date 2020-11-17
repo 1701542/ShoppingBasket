@@ -5,9 +5,26 @@
 </p>
 
 <p>
+	<%= link_to 'View Products', :controller => :products, :action => :index %> | 
+	<%= link_to 'View Basket', controller: 'basket_products' %>
+</p>
+
+<p>
 	<strong>Price: </strong>
 	£<%= @product.price %>
 </p>
+
+<% if BasketProduct.where(:product => @product).any? %>
+	<p>
+		<strong>Currently in basket: </strong>
+		<%= BasketProduct.find_by(product: @product.id).quantity %>
+		<td><%= link_to 'Increase', basket_product_add_path(BasketProduct.find_by(product: @product.id)), method: :post %></td>
+		
+		<% if BasketProduct.find_by(product: @product.id).quantity > 0 %>
+			<td><%= link_to 'Decrease', basket_product_reduce_path(BasketProduct.find_by(product: @product.id)), method: :post %></td>
+		<% end %>
+	</p>
+<% end %>
 
 <p>
 	<strong>Description:</strong>
@@ -21,4 +38,6 @@
 	<% end %>
 </p>
 
-<%= link_to 'Back', products_path %>
+<p>
+	<%= link_to 'Edit Product', edit_product_path(@product) %>
+</p>

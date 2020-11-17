@@ -3,8 +3,12 @@
 <h2>Products</h2>
 
 <p>
-<%= link_to 'New product', new_product_path %> | 
-<%= link_to 'View Basket', controller: 'basket_products' %>
+	<%= link_to 'View Products', :controller => :products, :action => :index %> | 
+	<%= link_to 'View Basket', controller: 'basket_products' %>
+</p>
+
+<p>
+	<%= link_to 'Add New Product', new_product_path %>
 </p>
 
 <table>

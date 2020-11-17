@@ -3,16 +3,18 @@ class BasketProductsController < ApplicationController
 		@basket_product = BasketProduct.find(params[:id])
 		@basket_product.quantity += 1
 		@basket_product.save
-		redirect_to index
+		
+		redirect_to @basket_product.product
 	end
 	
 	def quantity_reduce
 		@basket_product = BasketProduct.find(params[:id])
-		if @basket_product.quantity > 1
+		if @basket_product.quantity > 0
 			@basket_product.quantity -= 1
 		end
 		@basket_product.save
-		redirect_to basket_products_path
+		
+		redirect_to @basket_product.product
 	end
 	
 	def destroyall

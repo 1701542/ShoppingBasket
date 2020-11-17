@@ -1,9 +1,13 @@
 <h1><%= link_to 'Scamazon', controller: 'welcome' %></h1>
 
 <h2>Basket</h2>
+<p>
+	<%= link_to 'View Products', :controller => :products, :action => :index %> | 
+	<%= link_to 'View Basket', controller: 'basket_products' %>
+</p>
 
 <% if BasketProduct.first.nil? == true %>
-	<p><h3>There are no items<h3></p>
+	<p><h3>There are no items</h3></p>
 <% else %>
 	<table>
 		<td>Quantity</td>
@@ -16,13 +20,14 @@
 				<td><%= basket_product.quantity %></td>
 				<td><%= link_to basket_product.product.name, product_path(basket_product.product) %></td>
 				<td>£<%= basket_product.product.price %></td>
+				<td><%= link_to 'Increase', basket_product_add_path(basket_product), method: :post %></td>
+				<td><%= link_to 'Decrease', basket_product_reduce_path(basket_product), method: :post %></td>
 				<td><%= link_to 'Remove', basket_product_path(basket_product), method: :delete %></td>
 			</tr>
 		<% end %>
 	</table>
-<% end %>
 
-<p>
-	<%= link_to 'View products', controller: 'products' %> | 
-	<%= link_to 'Empty Basket', basket_product_destroyall_path, method: :destroyall %>
-</p>
+	<p>
+		<%= link_to 'Empty Basket', basket_product_destroyall_path, method: :destroyall %>
+	</p>
+<% end %>
