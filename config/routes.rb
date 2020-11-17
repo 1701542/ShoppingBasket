@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 	post '/basket_products/:id/reduce' => 'basket_products#quantity_reduce', as: 'basket_product_reduce'
 	post '/basket_products/destroyall' => 'basket_products#destroyall', as: 'basket_product_destroyall'
 	post 'basket_products' => 'basket_products#create'
-  
+  	delete 'basket_products/:id/destroy' => 'basket_products#destroy'
+
 	resources :products
 	resources :basket_products
   

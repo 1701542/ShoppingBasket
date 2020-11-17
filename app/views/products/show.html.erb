@@ -15,7 +15,10 @@
 </p>
 
 <p>
-	<%= button_to 'Add to basket', basket_products_path(:product_id => @product.id) %>
+	<%= link_to 'Add to basket', basket_products_path(:product_id => @product.id), method: :post %> 
+	<% if BasketProduct.where(:product => @product).any? %>
+		 | <%= link_to 'Remove from basket', basket_product_path(BasketProduct.find_by(product: @product.id)), method: :delete %>
+	<% end %>
 </p>
 
 <%= link_to 'Back', products_path %>
