@@ -22,6 +22,8 @@
 		
 		<% if BasketProduct.find_by(product: @product.id).quantity > 0 %>
 			<td><%= link_to 'Decrease', basket_product_reduce_path(BasketProduct.find_by(product: @product.id)), method: :post %></td>
+		<% else %>
+			<td><%= link_to 'Decrease', basket_product_path(BasketProduct.find_by(product: @product.id)), method: :delete %></td>
 		<% end %>
 	</p>
 <% end %>

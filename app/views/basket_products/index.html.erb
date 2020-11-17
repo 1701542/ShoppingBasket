@@ -12,16 +12,20 @@
 	<table>
 		<td>Quantity</td>
 		<td>Name</td>
-		<td>Price</td>
+		<td>Total</td>
 		<td>Actions</td>
 	
 		<% @basket_products.each do |basket_product| %>
 			<tr>
 				<td><%= basket_product.quantity %></td>
 				<td><%= link_to basket_product.product.name, product_path(basket_product.product) %></td>
-				<td>£<%= basket_product.product.price %></td>
+				<td>£<%= basket_product.product.price * basket_product.quantity %></td>
 				<td><%= link_to 'Increase', basket_product_add_path(basket_product), method: :post %></td>
-				<td><%= link_to 'Decrease', basket_product_reduce_path(basket_product), method: :post %></td>
+				
+				<% if basket_product.quantity > 1 %>
+					<td><%= link_to 'Decrease', basket_product_reduce_path(basket_product), method: :post %></td>
+				<% end %>
+				
 				<td><%= link_to 'Remove', basket_product_path(basket_product), method: :delete %></td>
 			</tr>
 		<% end %>
